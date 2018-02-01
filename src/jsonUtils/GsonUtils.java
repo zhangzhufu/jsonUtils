@@ -17,11 +17,11 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  * 
- * <strong>ÀàÃèÊö£º</strong> gson½âÎöjson¹¤¾ßÀà<br/>
- * <strong>´´½¨Õß£º</strong> ZZF<br/>
- * <strong>ÏîÄ¿Ãû³Æ£º</strong> jsonUtils<br/>
- * <strong>´´½¨Ê±¼ä£º</strong> 2018Äê1ÔÂ17ÈÕ ÏÂÎç2:32:45<br/>
- * <strong>°æ±¾ºÅ£º</strong> v1.0<br/>
+ * <strong>ç±»æè¿°ï¼š</strong> gson è§£æ json å·¥å…·ç±»<br/>
+ * <strong>åˆ›å»ºè€…ï¼š</strong> ZZF<br/>
+ * <strong>é¡¹ç›®åç§°ï¼š</strong> jsonUtils<br/>
+ * <strong>åˆ›å»ºæ—¶é—´ï¼š</strong> 2018å¹´2æœˆ1æ—¥ ä¸Šåˆ10:25:05<br/>
+ * <strong>ç‰ˆæœ¬å·ï¼š</strong> v1.0<br/>
  */
 public class GsonUtils {
 
@@ -29,7 +29,6 @@ public class GsonUtils {
 	}
 
 	/*
-	 * ×Ô¶¨ÒåStringÊÊÅäÆ÷
 	 */
 	private static final TypeAdapter<String> STRING = new TypeAdapter<String>() {
 		public String read(JsonReader reader) throws IOException {
@@ -39,9 +38,9 @@ public class GsonUtils {
 			}
 			return reader.nextString();
 		}
+
 		public void write(JsonWriter writer, String value) throws IOException {
 			if (value == null) {
-				// ÔÚÕâÀï´¦Àínull¸ÄÎª¿Õ×Ö·û´®
 				writer.value("");
 				return;
 			}
@@ -50,7 +49,6 @@ public class GsonUtils {
 	};
 	private static Gson gson = null;
 
-	// »ñÈ¡¹¤¾ßÊµÀı
 	public static Gson getInstance() {
 		if (gson == null) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
@@ -60,56 +58,21 @@ public class GsonUtils {
 		return gson;
 	}
 
-	/**
-	 * 
-	 * <strong>·½·¨ÃèÊö £º</strong> javaBean×ª»»json×Ö·û´®<br/>
-	 * <strong>´´½¨Ê±¼ä£º</strong> 2018Äê1ÔÂ17ÈÕ ÏÂÎç2:34:31<br/>
-	 * 
-	 * @param clazz
-	 * @return
-	 */
 	public static String toJson(Class<?> clazz) {
 		return getInstance().toJson(clazz);
 	}
 
-	/**
-	 * 
-	 * <strong>·½·¨ÃèÊö £º</strong> json ×Ö·û´®×ª»»javaBeanÊµÌå<br/>
-	 * <strong>´´½¨Ê±¼ä£º</strong> 2018Äê1ÔÂ17ÈÕ ÏÂÎç2:35:07<br/>
-	 * 
-	 * @param json
-	 * @param clazz
-	 * @return
-	 */
 	public static Object fromJson(String json, Class<?> clazz) {
 		Object obj = null;
 		obj = getInstance().fromJson(json, clazz);
 		return obj;
 	}
 
-	/**
-	 * 
-	 * <strong>·½·¨ÃèÊö £º</strong> json ×Ö·û´®×ª»»javaBeanÊµÌålist¼¯ºÏ<br/>
-	 * <strong>´´½¨Ê±¼ä£º</strong> 2018Äê1ÔÂ17ÈÕ ÏÂÎç2:38:42<br/>
-	 * 
-	 * @param json
-	 * @param clazz
-	 * @return
-	 */
 	public static <T> List<T> fromJsonToList(String json, Class<T[]> clazz) {
 		T[] array = getInstance().fromJson(json, clazz);
 		return Arrays.asList(array);
 	}
 
-	/**
-	 * 
-	 * <strong>·½·¨ÃèÊö £º</strong> json ×Ö·û´®×ª»»javaBeanÊµÌåArrayList¼¯ºÏ<br/>
-	 * <strong>´´½¨Ê±¼ä£º</strong> 2018Äê1ÔÂ17ÈÕ ÏÂÎç2:39:06<br/>
-	 * 
-	 * @param json
-	 * @param clazz
-	 * @return
-	 */
 	public static <T> ArrayList<T> fromJsonToArrayList(String json, Class<T> clazz) {
 		Type type = new TypeToken<ArrayList<JsonObject>>() {
 		}.getType();
